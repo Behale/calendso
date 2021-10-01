@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           freeBusyTimes: req.body.data.freeBusyTimes,
           user: {
             connect: {
-              id: session.user.id,
+              id: session?.user?.id,
             },
           },
         },
@@ -31,6 +31,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Unable to create schedule." });
+    }
+  } else if (req.method === "PUT") {
+    try {
+      const updatedSchedule = await prisma.schedule.updateMany({
+        where: {
+          userId: session?.user?.id,
+        },
+        data: {
+          freeBusyTimes: req.body.data.freeBusyTimes,
+        },
+      });
+
+      return res.status(200).json({
+        message: "updated",
+        data: updatedSchedule,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Unable to update schedule." });
     }
   }
 }
