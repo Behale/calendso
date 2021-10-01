@@ -55,7 +55,7 @@ export default function Custom404() {
                 Check for spelling mistakes or go back to the previous page.
               </span>
             ) : (
-              <a href="https://cal.com/signup" className="inline-block mt-2 text-lg ">
+              <a href="/auth/signup" className="inline-block mt-2 text-lg ">
                 The username <strong className="text-blue-500">cal.com{username}</strong> is still available.{" "}
                 <span className="text-blue-500">Register now</span>.
               </a>
@@ -66,7 +66,7 @@ export default function Custom404() {
             {!isEventType404 && (
               <ul role="list" className="mt-4">
                 <li className="border-2 border-green-500 px-4 py-2">
-                  <a href="https://cal.com/signup" className="relative py-6 flex items-start space-x-4">
+                  <a href="/auth/signup" className="relative py-6 flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       <span className="flex items-center justify-center h-12 w-12 rounded-lg bg-green-50">
                         <CheckIcon className="h-6 w-6 text-green-500" aria-hidden="true" />

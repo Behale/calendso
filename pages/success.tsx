@@ -227,12 +227,12 @@ export default function Success(props: inferSSRProps<typeof getServerSideProps>)
                   )}
                   {!props.hideBranding && (
                     <div className="mt-4 pt-4 border-t dark:border-gray-900  text-gray-400 text-center text-xs dark:text-white">
-                      <a href="https://cal.com/signup">Create your own booking link with Cal.com</a>
+                      <a href="/auth/signup">Create your own booking link with Cal.com</a>
 
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                          router.push(`https://cal.com/signup?email=` + (e as any).target.email.value);
+                          router.push(`/auth/signup?email=` + (e as any).target.email.value);
                         }}
                         className="flex mt-4">
                         <input
