@@ -42,10 +42,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (existingUser) {
-    const message: string =
-      existingUser.email !== email ? "Username already taken" : "Email address is already registered";
+    const verificationRequest = await prisma.verificationRequest.findFirst({
+      where: { identifier: email },
+    });
 
-    return res.status(409).json({ message });
+    if (!verificationRequest || existingUser.emailVerified) {
+      const message: string =
+        existingUser.email !== email ? "Username already taken" : "Email address is already registered";
+
+      return res.status(409).json({ message });
+    }
   }
 
   const hashedPassword = await hashPassword(password);
